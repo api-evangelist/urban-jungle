@@ -1,0 +1,315 @@
+aid: urban-jungle
+name: Urban Jungle
+review:
+  question: Does Urban Jungle expose a public, self-serve developer portal or downloadable API specification?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: insurtech-dtc
+  gated: true
+findings:
+  summary: |
+    Urban Jungle has a real API and no public API surface. The company
+    announced a partnership programme and quote API in 2018 so that lettings
+    agents, PropTech firms, institutional landlords and eCommerce sites could
+    serve Urban Jungle quotes inside their own products without being directly
+    FCA-regulated. That API is real, but it is entirely partner-gated: there is
+    no developer portal, no reference documentation, no OpenAPI/Swagger, no
+    published authentication scheme, no webhook catalog and no Postman
+    collection. The only documented route to integration is an email address on
+    a marketing page.
+
+    This record is an honest stub. It is the correct outcome for a UK DTC
+    insurtech: the UK has no open-insurance obligation (the FCA's Open Finance
+    work remains consultation, not rule), and the only market-wide API
+    modernization effort — the Lloyd's / London Market Blueprint Two, PPL,
+    Whitespace and Ki programme — is aimed at brokers and syndicates, not
+    developers. Urban Jungle sits in the dense UK insurtech cluster around that
+    market (Zego, Marshmallow, Cuvva, Superscript) and its integration surface
+    is a commercial partnership, not a product.
+  domainNote: |
+    The assigned primary domain urbanjungle.com is NOT the insurtech. It returns
+    HTTP 202 with a Sucuri sgcaptcha challenge redirect and serves no Urban
+    Jungle Insurance content. The company's real operating domain is
+    myurbanjungle.com (HTTP 200), confirmed by FCA FRN 782061 and Companies
+    House number 10414152 in its own site footer, and by the
+    partnerships@myurbanjungle.com address in its partner module.
+  developerPortal:
+    url: ''
+    confirmed: false
+    classification: none
+    note: |
+      No developer portal exists. Every conventional developer host fails DNS
+      resolution. The one host that answers, api.myurbanjungle.com, returns a
+      two-byte "OK" body from gunicorn with access-control-allow-origin: *, and
+      every specification path on it 404s — it is a health/CORS endpoint for the
+      first-party web app, not a documented API.
+
+      Path probing against myurbanjungle.com is meaningless: the site is an
+      Angular single-page app that soft-404s, returning HTTP 200 and a byte-
+      identical shell for /developers, /openapi.json and a deliberately bogus
+      /zzzznonexistent1234 alike. The real route table was therefore extracted
+      from the application bundle main-KZKSFKYK.js. It contains no developer,
+      docs, api or reference route. The only partner-facing route is /partners,
+      lazily loading PartnersModule from chunk-M6XB73IX.js.
+  probes:
+  - url: https://urbanjungle.com/
+    status: 202
+    note: Sucuri sgcaptcha challenge; not the insurtech.
+  - url: https://myurbanjungle.com/
+    status: 200
+    note: Angular SPA; the real Urban Jungle Insurance site.
+  - url: https://api.myurbanjungle.com/
+    status: 200
+    note: 'Body is literally "OK" (2 bytes), server: gunicorn, ACAO *. Health endpoint.'
+  - url: https://api.myurbanjungle.com/openapi.json
+    status: 404
+  - url: https://api.myurbanjungle.com/openapi.yaml
+    status: 404
+  - url: https://api.myurbanjungle.com/swagger.json
+    status: 404
+  - url: https://api.myurbanjungle.com/v1/openapi.json
+    status: 404
+  - url: https://api.myurbanjungle.com/api-docs
+    status: 404
+  - url: https://api.myurbanjungle.com/docs
+    status: 404
+  - url: https://api.myurbanjungle.com/spec
+    status: 404
+  - url: https://api.myurbanjungle.com/redoc
+    status: 404
+  - url: https://api.myurbanjungle.com/graphql
+    status: 404
+  - url: https://api.myurbanjungle.com/.well-known/openid-configuration
+    status: 404
+  - url: https://api.myurbanjungle.com/.well-known/oauth-authorization-server
+    status: 404
+  - url: https://developer.myurbanjungle.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://developers.myurbanjungle.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://docs.myurbanjungle.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://apidocs.myurbanjungle.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://partners.myurbanjungle.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://partner.myurbanjungle.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://b2b.myurbanjungle.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://myurbanjungle.com/partners
+    status: 200
+    note: >-
+      Soft-200 from the SPA shell; the route is real and confirmed in the client
+      bundle as PartnersModule. Marketing recruitment page, not documentation.
+  - url: https://myurbanjungle.com/zzzznonexistent1234
+    status: 200
+    note: Control probe proving the site soft-404s on every path.
+  - url: https://myurbanjungle.com/chunk-M6XB73IX.js
+    status: 200
+    note: PartnersModule bundle; source of the partner-integration model detail below.
+  - url: https://myurbanjungle.com/robots.txt
+    status: 200
+    note: >-
+      Explicitly allows OAI-SearchBot, ChatGPT-User, Google-Extended,
+      anthropic-ai, Claude-Web and PerplexityBot; disallows /quote/, /account/
+      and /login. AI-crawler-friendly marketing, not an agent API surface.
+  - url: https://myurbanjungle.com/sitemap.xml
+    status: 200
+    note: >-
+      Index over sitemap-app.xml and explore/sitemap.xml. Neither lists any
+      developer, docs, API or partner page.
+  specifications:
+    openapiHarvested: false
+    count: 0
+    note: >-
+      No OpenAPI, Swagger, AsyncAPI, GraphQL SDL or .proto artifact exists in
+      public. The openapi/ directory is deliberately omitted from this repo
+      because nothing real was found to put in it.
+  acord:
+    posture: no ACORD reference found
+    evidence: >-
+      Case-insensitive search for "ACORD" returned zero hits across the rendered
+      homepage HTML, the /partners page HTML, the Angular main bundle
+      (main-KZKSFKYK.js) and the partner module bundle (chunk-M6XB73IX.js). No
+      mention of AL3, ACORD XML, NGDS or ACORD certification anywhere on the
+      site. This is expected: Urban Jungle is a UK DTC digital intermediary with
+      no agency-management-system distribution, so it has no reason to speak
+      ACORD.
+  insuranceVerbs:
+    quote:
+      exposed: true
+      audience: partner-only
+      note: >-
+        The partner API's stated purpose is quoting — "Give customers a
+        personalised quote, on your site or app" and "Take advantage of the
+        information you already have on your customers." Partner-gated; no
+        documentation.
+    bind:
+      exposed: false
+      note: >-
+        Not offered as an API. Partners either wrap the Urban Jungle journey or
+        hand the customer off to myurbanjungle.com to complete purchase.
+    issue:
+      exposed: false
+      note: Policy issuance stays inside Urban Jungle's own journey.
+    fnol:
+      exposed: false
+      note: No claims or FNOL API, catalog or documentation of any kind.
+  partnerIntegrationModels:
+  - name: Simple Referral
+    note: >-
+      "We set you up with an account and a unique referral link." Get going
+      "through CRM, marketplace, offers section, etc."
+  - name: API Integration
+    note: >-
+      "Give customers a personalised quote, on your site or app." "Use our
+      sample code to get set up in less than a day." Sample code is not
+      published publicly.
+  - name: Journey Wrap
+    note: >-
+      "Wrap our journey in your experience or send customers to our site."
+  targetPartnerSegments:
+  - Letting Agents
+  - PropTech Companies
+  - Institutional Landlords
+  - eCommerce Sites
+  - Financial Services
+  authModel:
+    scheme: undocumented
+    note: >-
+      No authentication scheme is published. The partner page describes an
+      "account" and a "unique referral link", which implies at minimum a partner
+      identifier, but no API key, OAuth2, mTLS or SAML flow is documented.
+      Neither /.well-known/openid-configuration nor
+      /.well-known/oauth-authorization-server is served on api.myurbanjungle.com
+      (both 404) or resolvable elsewhere.
+  webhooks:
+    present: false
+    note: No event catalog, AsyncAPI document or webhook documentation found.
+  postman:
+    present: false
+    note: >-
+      Postman public search for "urban jungle insurance" returned zero
+      workspaces, collections, APIs or specifications.
+  graphql:
+    present: false
+    note: /graphql on api.myurbanjungle.com returns 404; no GraphQL surface found.
+  grpc:
+    present: false
+    note: No published .proto artifacts.
+  githubOrganization:
+    present: false
+    note: >-
+      github.com/urbanjungle is an unrelated personal account (handle bzbugsy, 0
+      public repos); github.com/myurbanjungle returns 404. No company GitHub
+      organization exists.
+  transports:
+  - protocol: REST
+    scheme: https
+    baseURL: ''
+    documented: false
+    note: >-
+      A partner REST/quote API is known to exist from the company's own 2018
+      announcement, but no base URL, path, payload or version is published.
+  - protocol: GraphQL
+    documented: false
+  - protocol: WebSocket
+    scheme: wss
+    documented: false
+  - protocol: gRPC
+    documented: false
+  - protocol: ACORD/EDI
+    documented: false
+    note: No ACORD, AL3 or agency-download transport referenced.
+identity:
+  legalName: Urban Jungle Services Ltd
+  founded: 2016
+  founders:
+  - Jimmy Williams
+  - Greg Smyth
+  headquarters: London, United Kingdom
+  homeMarket: United Kingdom
+  companyNumber: '10414152'
+  companyRegistry: England and Wales
+  fcaFirmReferenceNumber: '782061'
+  regulator: Financial Conduct Authority
+  certification: B Corp
+  linesOfBusiness:
+  - Contents insurance
+  - Buildings and contents insurance
+  - Students contents insurance
+  - Tenants liability insurance
+  - Landlord insurance
+  - Home emergency cover
+  - Public liability cover
+  distribution: Direct to consumer, plus a partner referral/quote programme
+sources:
+- url: https://myurbanjungle.com/
+  type: Website
+  status: 200
+  fetched: '2026-07-25'
+  note: Angular SPA. og:title "Urban Jungle".
+- url: https://myurbanjungle.com/explore/
+  type: Website
+  status: 200
+  fetched: '2026-07-25'
+  note: >-
+    Source of FCA FRN 782061, company number 10414152, B Corp certification,
+    100,000+ customers claim and the product list.
+- url: https://myurbanjungle.com/partners
+  type: Partners
+  status: 200
+  fetched: '2026-07-25'
+  note: >-
+    Partner recruitment page. Contact is
+    mailto:partnerships@myurbanjungle.com. Confirmed via PartnersModule bundle.
+- url: https://myurbanjungle.com/chunk-M6XB73IX.js
+  type: Bundle
+  status: 200
+  fetched: '2026-07-25'
+  note: >-
+    Angular PartnersModule; source of the three integration models, the partner
+    segments and the partnerships email. Zero ACORD hits.
+- url: https://myurbanjungle.com/main-KZKSFKYK.js
+  type: Bundle
+  status: 200
+  fetched: '2026-07-25'
+  note: >-
+    Application route table. No developer/docs/api/reference route exists;
+    "partners" is the only partner-facing route.
+- url: https://myurbanjungle.com/explore/blog/urban-jungle-launches-industry-first-partnership-programme-and-api/
+  type: Blog
+  status: 200
+  fetched: '2026-07-25'
+  note: >-
+    Company announcement of the partnership programme and API. States partners
+    can "serve insurance quotes within their own apps" and remain compliant
+    "without the need to be directly regulated by the FCA". Access via the
+    partners page or partnerships@myurbanjungle.com. No docs URL, no ACORD, no
+    auth, no webhooks. First partner named as CreditLadder.
+- url: https://www.postonline.co.uk/technology/3414581/urban-jungle-develops-api-for-home-and-contents-insurance
+  type: Press
+  status: 200
+  fetched: '2026-07-25'
+  note: >-
+    Insurance Post. Confirms the API is partner-only and "will be rolled out to
+    partnering home insurers"; no technical detail given.
+actions:
+  openapiDirectoryCreated: false
+  apisListed: 0
+  reason: >-
+    Nothing real was found to harvest. apis[] is intentionally empty because
+    Urban Jungle publishes no documented API with a reference page, base URL or
+    specification. The known partner quote API is recorded in common[] as a
+    Partners property with its honest access model rather than fabricated into
+    an apis[] entry.
