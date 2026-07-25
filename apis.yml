@@ -36,6 +36,8 @@ modified: '2026-07-25'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/urban-jungle-domain-security.yml
 - type: Website
   url: https://myurbanjungle.com/
 - type: About
@@ -49,14 +51,68 @@ common:
     personalised quote, on your site or app"), and a full-journey wrap. Access is
     by emailing partnerships@myurbanjungle.com; no reference documentation, keys
     or specification are published.
+- type: Partners
+  url: https://hello.myurbanjungle.com/partner-with-us/
+  name: Urban Jungle Affiliate Programme
+  description: >-
+    Separate Unbounce-hosted affiliate landing page on hello.myurbanjungle.com,
+    found this round. Application is a Google Form; approved affiliates get "a
+    unique affiliate link" and commission. This is the referral tier of the
+    partner programme, not an API tier — no keys, endpoints or documentation
+    are published here either.
 - type: Blog
   url: https://myurbanjungle.com/explore/blog/
+- type: BlogRSS
+  url: https://myurbanjungle.com/explore/rss/
+- type: Support
+  url: https://myurbanjungle.zendesk.com/hc/en-gb
+  name: Urban Jungle Help Centre
+  description: >-
+    Zendesk-hosted customer help centre (category "Urban Jungle Help Centre",
+    created 2025-08-15). Customer support only — it contains no developer,
+    partner or API content. Browser requests are challenged (HTTP 403), but the
+    public Zendesk Help Center API on the same tenant responds anonymously.
+- type: Contact
+  url: https://myurbanjungle.com/contact_us
+- type: Login
+  url: https://myurbanjungle.com/account_manager
+  name: Account manager
+  description: >-
+    Customer account login. There is no partner or developer login; account
+    creation happens only through the consumer quote-and-buy journey.
 - type: Careers
   url: https://myurbanjungle.com/explore/careers/
 - type: Team
   url: https://myurbanjungle.com/explore/meet-the-team/
 - type: Legal
   url: https://myurbanjungle.com/legal
+- type: PrivacyPolicy
+  url: https://myurbanjungle.com/legal/privacy_policy
+- type: TermsOfService
+  url: https://myurbanjungle.com/legal/tac
+- type: LinkedIn
+  url: https://www.linkedin.com/company/urban-jungle-insurance/
+- type: YouTube
+  url: https://www.youtube.com/@urbanjungle_ins
+- type: Instagram
+  url: https://www.instagram.com/urbanjungle_ins
+- type: Conformance
+  url: conformance/urban-jungle-conformance.yml
+  name: Standards conformance assertions
+  description: >-
+    Regulatory conformance is real (FCA FRN 782061, UK GDPR privacy policy,
+    B Corp, TLS/HSTS); every technical API standard is asserted false against a
+    recorded negative probe rather than an absence of effort.
+- type: LLMsTxt
+  url: llms/urban-jungle-llms.txt
+- type: WellKnownProbe
+  url: well-known/urban-jungle-well-known.yml
+  name: Well-known probe index
+  description: >-
+    Recorded result is NONE. Deliberately not typed WellKnown: Urban Jungle
+    serves no /.well-known/ document on any host, and myurbanjungle.com
+    soft-404s (HTTP 200 plus a byte-identical SPA shell for every path,
+    including bogus control paths), so its 200s are not documents.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

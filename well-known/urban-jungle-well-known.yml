@@ -1,0 +1,79 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of every Urban Jungle host known to the catalog
+result: none
+summary: >-
+  Urban Jungle serves no /.well-known/ discovery surface on any of its hosts.
+  The API host (api.myurbanjungle.com) hard-404s every well-known path. The
+  marketing host (myurbanjungle.com) is an Angular single-page app that
+  SOFT-404s: it returns HTTP 200 with a byte-identical 22,565-byte shell for
+  every path, including deliberately bogus control paths, so a 200 there is
+  not evidence a document exists. Each 200 recorded below was verified by
+  SHA-1 against the control probe and is the SPA shell, not a document.
+documents: []
+hosts:
+- host: https://api.myurbanjungle.com
+  soft_404: false
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://myurbanjungle.com
+  soft_404: true
+  soft_404_evidence: >-
+    sha1(/llms.txt) == sha1(/.well-known/security.txt) ==
+    sha1(/zzzznope999) == 501042c4a665..., 22565 bytes, body begins
+    "<!doctype html>" with <title>Urban Jungle Insurance</title>.
+  probes:
+  - path: /.well-known/security.txt
+    status: 200
+    document: false
+    note: SPA shell, not a document.
+  - path: /.well-known/openid-configuration
+    status: 200
+    document: false
+    note: SPA shell, not a document.
+  - path: /.well-known/api-catalog
+    status: 200
+    document: false
+    note: SPA shell, not a document.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    document: false
+    note: SPA shell, not a document.
+  - path: /llms.txt
+    status: 200
+    document: false
+    note: SPA shell, not a document.
+  - path: /robots.txt
+    status: 200
+    document: true
+    note: >-
+      Real file (not the shell). Explicitly allows OAI-SearchBot, ChatGPT-User,
+      Google-Extended, anthropic-ai, Claude-Web and PerplexityBot; disallows
+      /quote/, /account/ and /login.
+  - path: /sitemap.xml
+    status: 200
+    document: true
+    note: >-
+      Real file. Index over sitemap-app.xml and explore/sitemap.xml; neither
+      lists a developer, docs, API or reference page.
+- host: https://hello.myurbanjungle.com
+  soft_404: false
+  probes:
+  - path: /llms.txt
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /robots.txt
+    status: 200
+    document: true

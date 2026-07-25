@@ -1,0 +1,43 @@
+# Urban Jungle
+
+> Urban Jungle Services Ltd is a London-based direct-to-consumer insurtech founded in 2016 by Jimmy Williams and Greg Smyth, selling home, contents, students contents, tenants liability, landlord, home emergency and public liability cover to UK renters and sharers at myurbanjungle.com. It is FCA-authorised (FRN 782061), registered in England and Wales (company number 10414152) and a certified B Corp. Urban Jungle operates a partner quote API, announced in 2018, but that API is entirely partner-gated: there is no developer portal, no reference documentation, no machine-readable specification, no published authentication scheme and no self-serve signup.
+
+## Machine-readable contracts
+
+Urban Jungle publishes none. As of 2026-07-25 no OpenAPI, Swagger, AsyncAPI, GraphQL SDL, .proto, Postman collection or webhook catalog exists in public, and no /.well-known/ document is served on any Urban Jungle host. Do not attempt to guess endpoints: the only host that answers, https://api.myurbanjungle.com, returns a two-byte "OK" body and hard-404s every specification path, and https://myurbanjungle.com is an Angular single-page app that soft-404s (HTTP 200 plus an identical HTML shell for every path, including bogus ones), so a 200 from it is never evidence a resource exists.
+
+## How to integrate
+
+- Partnership programme: https://myurbanjungle.com/partners
+- Affiliate programme: https://hello.myurbanjungle.com/partner-with-us/
+- The only documented route to API access is emailing partnerships@myurbanjungle.com. Three integration models are offered: Simple Referral (a unique referral link), API Integration ("Give customers a personalised quote, on your site or app", with sample code supplied privately to partners), and a journey wrap. Target partners are letting agents, PropTech companies, institutional landlords, eCommerce sites and financial services firms; the design intent is that a partner can serve Urban Jungle quotes without being directly FCA-regulated.
+
+## Company
+
+- Website: https://myurbanjungle.com/
+- About: https://myurbanjungle.com/about_us
+- Policy features: https://myurbanjungle.com/policy_features
+- Meet the team: https://myurbanjungle.com/explore/meet-the-team/
+- Careers: https://myurbanjungle.com/explore/careers/
+- Blog: https://myurbanjungle.com/explore/blog/
+- Blog RSS: https://myurbanjungle.com/explore/rss/
+- Help centre: https://myurbanjungle.zendesk.com/hc/en-gb
+- Contact: https://myurbanjungle.com/contact_us
+- Account manager (customer login): https://myurbanjungle.com/account_manager
+- Privacy policy: https://myurbanjungle.com/legal/privacy_policy
+- Terms and conditions: https://myurbanjungle.com/legal/tac
+
+## Regulatory identity
+
+- Regulator: UK Financial Conduct Authority, firm reference number 782061
+- Company: Urban Jungle Services Ltd, England and Wales, number 10414152
+- Certification: B Corp
+- Home market: United Kingdom. There is no UK open-insurance mandate; the FCA's Open Finance work remains consultation rather than rule, so nothing obliges Urban Jungle to publish an API.
+
+## API Evangelist artifacts in this repo
+
+- APIs.json: https://raw.githubusercontent.com/api-evangelist/urban-jungle/refs/heads/main/apis.yml
+- Provider review (what was probed and what was found): review.yml
+- Well-known probe index: well-known/urban-jungle-well-known.yml
+- Domain security probe: security/urban-jungle-domain-security.yml
+- Conformance assertions: conformance/urban-jungle-conformance.yml

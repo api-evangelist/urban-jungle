@@ -313,3 +313,41 @@ actions:
     specification. The known partner quote API is recorded in common[] as a
     Partners property with its honest access model rather than fabricated into
     an apis[] entry.
+enrichmentRounds:
+- date: '2026-07-25'
+  round: 2
+  outcome: confirmed-no-contract
+  note: 'Second contract-discovery pass re-probed every host and again found no machine-readable
+    contract. New this round: the marketing host''s soft-404 was proven by SHA-1 (sha1 of
+    /llms.txt == /.well-known/security.txt == /zzzznope999 == 501042c4a665..., 22565 bytes),
+    so no future round should trust a 200 from myurbanjungle.com. api.myurbanjungle.com hard-404s
+    the full well-known set plus /health, /v1, /api, /quote, /swagger, /swagger-ui, /schema
+    and /openapi.'
+  newFindings:
+  - Help centre found at https://myurbanjungle.zendesk.com/hc/en-gb (Zendesk tenant, category
+    created 2025-08-15). Browser UA is challenged with HTTP 403; the public Zendesk Help Center
+    API answers anonymously. Customer support content only, no developer or partner material.
+  - Second partner surface found at https://hello.myurbanjungle.com/partner-with-us/ (Unbounce
+    on Cloudflare) - the Affiliate Programme, applied for via a Google Form. Referral tier
+    only; still no keys, endpoints or documentation.
+  - 'Real footer links recovered from the server-rendered Ghost blog at /explore/blog/ (the
+    Angular shell exposes none): /contact_us, /account_manager, /legal/privacy_policy, /legal/tac
+    and /explore/rss/.'
+  - Angular route table re-extracted from main-KZKSFKYK.js (unchanged bundle). Still no developer,
+    docs, api or reference route. The partner-relevant routes are referral and quote/pcw_prepop/home
+    - price-comparison-website prepopulation, i.e. the aggregator integration is a redirect
+    journey, not an API.
+  - Affiliate page markets car insurance (/quote/motor/car/registration) and travel cover
+    alongside home; no motor route appears in the main bundle, so that journey is lazily loaded
+    or externally hosted. Not asserted as a product line here.
+  - 'No first-party packages: npm search for urbanjungle and myurbanjungle returns 0 results,
+    pypi.org/pypi/urbanjungle 404s, and both api.github.com/orgs/urbanjungle and /orgs/myurbanjungle
+    404.'
+  - 'No vulnerability-disclosure programme and no trust centre: the probe found no security.txt,
+    no disclosure page and no bug-bounty listing, and the status, trust, security, help and
+    support subdomains are all NXDOMAIN.'
+  artifactsWritten:
+  - security/urban-jungle-domain-security.yml
+  - well-known/urban-jungle-well-known.yml
+  - conformance/urban-jungle-conformance.yml
+  - llms/urban-jungle-llms.txt

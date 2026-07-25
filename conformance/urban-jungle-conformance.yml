@@ -1,0 +1,81 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  myurbanjungle.com site footer and /explore/ pages (FCA FRN, company number,
+  B Corp), live probes of api.myurbanjungle.com and myurbanjungle.com, and
+  review.yml round-1 findings. No specification exists to derive from.
+note: >-
+  Every technical standard below is asserted false on the strength of a
+  negative probe, not an absence of effort: Urban Jungle publishes no
+  machine-readable contract, so there is nothing to conform to a technical
+  standard with. The regulatory entries are the ones that carry real evidence.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document served on api.myurbanjungle.com
+    (/openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs,
+    /docs, /spec, /redoc, /schema, /swagger-ui all 404) or anywhere else.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface documented.
+- id: graphql
+  conforms: false
+  evidence: https://api.myurbanjungle.com/graphql returns 404.
+- id: grpc
+  conforms: false
+  evidence: No published .proto artifacts; no GitHub organization exists.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    /.well-known/oauth-authorization-server and /.well-known/oauth-protected-resource
+    return 404 on api.myurbanjungle.com; no OAuth flow documented.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on api.myurbanjungle.com.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No specification or error reference published.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt 404s on api.myurbanjungle.com and returns only
+    the SPA shell on myurbanjungle.com.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation or versioning policy published.
+- id: acord
+  conforms: false
+  evidence: >-
+    Case-insensitive search for ACORD, AL3 and NGDS returned zero hits across
+    the homepage, the /partners page and the Angular application bundles
+    (main-KZKSFKYK.js, chunk-M6XB73IX.js). Expected for a UK direct-to-consumer
+    intermediary with no agency-management-system distribution.
+- id: uk-open-insurance
+  conforms: false
+  evidence: >-
+    No UK open-insurance obligation exists. The FCA's Open Finance work remains
+    consultation rather than rule, so there is no mandated API surface to
+    conform to (contrast the CDR in Australia or the CMA Order in UK banking).
+- id: fca-authorisation
+  conforms: true
+  evidence: >-
+    Authorised and regulated by the UK Financial Conduct Authority, firm
+    reference number 782061, published in the myurbanjungle.com footer and on
+    hello.myurbanjungle.com. Company registered in England and Wales, number
+    10414152.
+- id: uk-gdpr
+  conforms: true
+  evidence: >-
+    Privacy policy published at https://myurbanjungle.com/legal/privacy_policy
+    and linked from the site footer.
+- id: b-corp
+  conforms: true
+  evidence: >-
+    Certified B Corporation; stated on https://myurbanjungle.com/explore/ and
+    across the company's marketing.
+- id: tls
+  conforms: true
+  evidence: >-
+    HTTPS on every host; myurbanjungle.com negotiates TLSv1.2 with HSTS
+    max-age 31536000. See security/urban-jungle-domain-security.yml.
