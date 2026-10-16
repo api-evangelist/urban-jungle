@@ -9,11 +9,11 @@
       "method": "discovered"
     },
     {
-      "source": "https://hello.myurbanjungle.com/partner-with-us/",
-      "feed_url": "https://hello.myurbanjungle.com/partner-with-us/",
+      "source": "https://myurbanjungle.com/explore/rss/",
+      "feed_url": "https://myurbanjungle.com/explore/rss/",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "feed"
     },
     {
       "source": "https://myurbanjungle.com/explore/blog/feed/",
@@ -23,13 +23,13 @@
       "method": "feed"
     },
     {
-      "source": "https://myurbanjungle.com/explore/rss/",
-      "feed_url": "https://myurbanjungle.com/explore/rss/",
+      "source": "https://hello.myurbanjungle.com/partner-with-us/",
+      "feed_url": "https://hello.myurbanjungle.com/partner-with-us/",
       "title": "",
       "saved": 0,
-      "method": "feed"
+      "method": "none"
     }
   ],
   "post_count": 15,
-  "fetched": "2026-10-03T12:30:02Z"
+  "fetched": "2026-10-10T13:15:00Z"
 }
